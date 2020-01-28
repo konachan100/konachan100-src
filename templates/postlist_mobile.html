@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer">
     <title>Konachan100</title>
     <style>
-        body{
+        body {
             background: #222222;
         }
+
         .img_frame {
             padding-bottom: 5%;
         }
@@ -16,18 +18,56 @@
             width: 100%;
             margin: 0 auto;
         }
+
+        #footer {
+            clear: both;
+            padding: 5%;
+        }
+
+        #links {
+            position: fixed;
+            bottom: 5%;
+            right: 5%;
+            padding: 1%;
+        }
+
+        .linkitem {
+            background-color: wheat;
+            margin: -10%;
+            text-align: center;
+        }
+
+        .linkspace {
+            padding: 60%;
+        }
     </style>
 </head>
+
 <body>
     <img src="https://konachan.net/images/konachan_net_sm_std.png" style="width: 100%; margin-left: -10%">
-{% for p in posts %}
+    {% for p in posts %}
     <div class="img_frame">
         <a href="{{ p['file_url'] }}" target="_blank">
             <img class="post_img" src="{{ p['preview_url'] }}">
         </a>
     </div>
-{% endfor %}
+    {% endfor %}
 
-
+    <div id="footer">
+        <div id="links">
+            <div class="linkitem">
+                <a href="konachan100.github.io">S</a>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <a href="konachan100.github.io/q">Q</a>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <a href="konachan100.github.io/e">E</a>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
