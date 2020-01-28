@@ -79,6 +79,11 @@
         .linkspace {
             padding: 60%;
         }
+        .linkbtn{
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
     </style>
     <script>
         var sUserAgent = navigator.userAgent.toLowerCase();
@@ -155,19 +160,34 @@
     </div>
     </div>
     {% endfor %}
+    <script>
+        var onClickLinks = function(url){
+            window.location = url
+        }
+        var onClickS = function(){
+            onClickLinks("//konachan100.github.io")
+        }
+        var onClickQ = function(){
+            onClickLinks("//konachan100.github.io/q")
+        }
+        var onClickE = function(){
+            onClickLinks("//konachan100.github.io/e")
+        }
+
+    </script>
 
     <div id="footer">
         <div id="links">
             <div class="linkitem">
-                <a href="//konachan100.github.io">S</a>
+                <button class="linkbtn" onclick="onClickS()"></button>
             </div>
             <div class="linkspace"></div>
             <div class="linkitem">
-                <a href="//konachan100.github.io/q">Q</a>
+                <button class="linkbtn" onclick="onClickQ()"></button>
             </div>
             <div class="linkspace"></div>
             <div class="linkitem">
-                <a href="//konachan100.github.io/e">E</a>
+                <button class="linkbtn" onclick="onClickE()"></button>
             </div>
         </div>
     </div>
