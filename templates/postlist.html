@@ -57,6 +57,26 @@
         td {
             word-break: break-all;
         }
+        #footer{
+            clear: both;
+            padding: 5%;
+        }
+        #links{
+            position:fixed;
+            bottom: 5%;
+            right: 5%;
+            padding: 1%;
+        }
+
+        .linkitem{
+            background-color: wheat;
+            margin: -10%;
+            text-align: center;
+        }
+        .linkspace{
+            padding: 60%;
+        }
+
     </style>
     <script>
         var sUserAgent = navigator.userAgent.toLowerCase();
@@ -134,9 +154,21 @@
     </div>
     {% endfor %}
 
-    <script>
-        document.write(browser)
-    </script>
+    <div id = "footer">
+        <div id="links">
+            <div class="linkitem">
+                <a href="konachan100.github.io">S</a>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <a href="konachan100.github.io/q">Q</a>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <a href="konachan100.github.io/e">E</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
