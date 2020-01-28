@@ -40,17 +40,17 @@ def gen_post_matrix_page(post_list, template, output):
 def gen_all_post_list_page(pl_s, pl_q, pl_e):
     print("Generating static pages")
     if 's' in output_pages:
-        gen_post_matrix_page(pl_s, template_pc, "index.html")
+        gen_post_matrix_page(pl_s, template_pc, "../index.html")
     if 'q' in output_pages:
-        gen_post_matrix_page(pl_q, template_pc, "q/index.html")
+        gen_post_matrix_page(pl_q, template_pc, "../q/index.html")
     if 'e' in output_pages:
-        gen_post_matrix_page(pl_e, template_pc, "e/index.html")
+        gen_post_matrix_page(pl_e, template_pc, "../e/index.html")
     if 'ms' in output_pages:
-        gen_post_list_page(pl_s, template_mobile, "m/index.html")
+        gen_post_list_page(pl_s, template_mobile, "../m/index.html")
     if 'mq' in output_pages:
-        gen_post_list_page(pl_q, template_mobile, "mq/index.html")
+        gen_post_list_page(pl_q, template_mobile, "../mq/index.html")
     if 'me' in output_pages:
-        gen_post_list_page(pl_e, template_mobile, "me/index.html")
+        gen_post_list_page(pl_e, template_mobile, "../me/index.html")
 
 def gen():
     pl_s = DataSourceS().Get()
