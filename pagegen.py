@@ -48,9 +48,9 @@ def gen_all_post_list_page(pl_s, pl_q, pl_e):
     if 'ms' in output_pages:
         gen_post_list_page(pl_s, template_mobile, "../m/index.html")
     if 'mq' in output_pages:
-        gen_post_list_page(pl_q, template_mobile, "../mq/index.html")
+        gen_post_list_page(pl_q, template_mobile, "../q/m/index.html")
     if 'me' in output_pages:
-        gen_post_list_page(pl_e, template_mobile, "../me/index.html")
+        gen_post_list_page(pl_e, template_mobile, "../e/m/index.html")
 
 def gen():
     pl_s = DataSourceS().Get()
