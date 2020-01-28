@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>Konachan100</title>
+    <style>
+        body{
+            background: #222222;
+        }
+        .img_frame {
+            padding-bottom: 5%;
+        }
+
+        .post_img {
+            width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://konachan.net/images/konachan_net_sm_std.png" style="width: 100%; margin-left: -10%">
+{% for p in posts %}
+    <div class="img_frame">
+        <a href="{{ p['file_url'] }}" target="_blank">
+            <img class="post_img" src="{{ p['preview_url'] }}">
+        </a>
+    </div>
+{% endfor %}
+
+
+</body>
+</html>
