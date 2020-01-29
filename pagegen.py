@@ -49,7 +49,7 @@ def gen_post_matrix_page(post_list, template, output):
 
 def build_static_page(target, postlist, template, outputpath):
     if target in output_pages:
-        gen_post_matrix_page(post_list, template, outputpath)
+        gen_post_matrix_page(postlist, template, outputpath)
     else:
         if os.path.exists(outputpath):
             os.remove(outputpath)
