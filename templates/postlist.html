@@ -180,17 +180,23 @@
 
     <div id="footer">
         <div id="links">
+            {% if "s" in othertargets %}
             <div class="linkitem">
                 <button class="linkbtn" onclick="onClickS()">S</button>
             </div>
             <div class="linkspace"></div>
+            {% endif %}
+            {% if "q" in othertargets %}
             <div class="linkitem">
                 <button class="linkbtn" onclick="onClickQ()">Q</button>
             </div>
             <div class="linkspace"></div>
+            {% endif %}
+            {% if "e" in othertargets %}
             <div class="linkitem">
                 <button class="linkbtn" onclick="onClickE()">E</button>
             </div>
+            {% endif%}
         </div>
     </div>
 </body>

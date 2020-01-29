@@ -9,7 +9,7 @@ option = None
 with open("option.json", "r") as op:
     option = json.loads(op.read())
 
-output_pages = ['s', 'ms', 'q', 'mq']
+output_pages = ['s', 'q']
 if option["output"]:
     output_pages =  option["output"]
 
@@ -29,7 +29,7 @@ def gen_post_list_page(post_list, template, output):
         fn.write(page)
     print("Page refreshed")
 
-def gen_post_matrix_page(post_list, template, output):
+def gen_post_matrix_page(post_list, template, output, target, othertargets):
     if post_list is None:
         return
     row = []
@@ -42,14 +42,14 @@ def gen_post_matrix_page(post_list, template, output):
     if len(col)>0:
         row.append(col)
     print("Rendering to "+output)
-    page = template.render(postrow = row)
+    page = template.render(postrow = row, target = target, othertargets = othertargets)
     with open(output, 'w') as fn:
         fn.write(page)
     print("Page refreshed")
 
 def build_static_page(target, postlist, template, outputpath):
     if target in output_pages:
-        gen_post_matrix_page(postlist, template, outputpath)
+        gen_post_matrix_page(postlist, template, outputpath, target, output_pages)
     else:
         if os.path.exists(outputpath):
             os.remove(outputpath)
@@ -60,9 +60,9 @@ def gen_all_post_list_page(pl_s, pl_q, pl_e):
     build_static_page("s", pl_s, template_pc, "../index.html")
     build_static_page("q", pl_q, template_pc, "../q/index.html")
     build_static_page("e", pl_e, template_pc, "../e/index.html")
-    build_static_page("ms", pl_s, template_mobile, "../m/index.html")
-    build_static_page("mq", pl_q, template_mobile, "../q/m/index.html")
-    build_static_page("me", pl_e, template_mobile, "../e/m/index.html")
+    build_static_page("s", pl_s, template_mobile, "../m/index.html")
+    build_static_page("q", pl_q, template_mobile, "../q/m/index.html")
+    build_static_page("e", pl_e, template_mobile, "../e/m/index.html")
     # if 's' in output_pages:
     #     gen_post_matrix_page(pl_s, template_pc, "../index.html")
     # if 'q' in output_pages:

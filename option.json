@@ -1,5 +1,7 @@
 {
-    "output":[
-        "s","ms","q","mq", "e", "me"
+    "output": [
+        "s",
+        "q",
+        "e"
     ]
 }
