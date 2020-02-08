@@ -99,7 +99,8 @@
 
     </script>
 
-    <!-- <div id="footer">
+    {% if "e" not in othertargets %}
+    <div id="footer">
         <div id="links">
             {% if "s" in othertargets %}
             <div class="linkitem">
@@ -119,7 +120,8 @@
             </div>
             {% endif%}
         </div>
-    </div> -->
+    </div>
+    {% endif %}
 </body>
 
 </html>
