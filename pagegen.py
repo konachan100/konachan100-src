@@ -4,6 +4,7 @@ import os
 import os.path
 from konachan import *
 import json
+import codecs
 
 option = None
 with open("option.json", "r") as op:
@@ -25,7 +26,7 @@ def gen_post_list_page(post_list, template, output, target, othertargets):
         return
     print("Rendering to "+output)
     page = template.render(posts = post_list, target = target, othertargets = othertargets)
-    with open(output, 'w') as fn:
+    with codecs.open(output, 'w', 'utf-8') as fn:
         fn.write(page)
     print("Page refreshed")
 
@@ -43,7 +44,7 @@ def gen_post_matrix_page(post_list, template, output, target, othertargets):
         row.append(col)
     print("Rendering to "+output)
     page = template.render(postrow = row, target = target, othertargets = othertargets)
-    with open(output, 'w') as fn:
+    with codecs.open(output, 'w', 'utf-8') as fn:
         fn.write(page)
     print("Page refreshed")
 
