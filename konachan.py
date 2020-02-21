@@ -27,7 +27,7 @@ class DataSource:
             print("Loading URL: "+ self.URL())
             result = webread(self.URL()).decode()
             print("Success, decoding JSON")
-            return json.loads(webread(self.URL()).decode())
+            return json.loads(result)
         except Exception as e:
             print("Failed, "+str(e))
             return None
