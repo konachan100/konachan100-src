@@ -41,8 +41,8 @@
         },
         {
             "rating":"s",
-            "name":"Senic",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20senic",
+            "name":"Scenic",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20scenic",
             "build_path":"../c/senic/"
         },
         {
