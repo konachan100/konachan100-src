@@ -29,7 +29,7 @@ template_mobile = env.get_template('postlist_mobile.html')
 
 if not os.path.exists('buildcount.txt'):
     with open('buildcount.txt', 'w') as f:
-        f.write(0)
+        f.write('0')
 buildcount = 0
 with open('buildcount.txt', 'r') as f:
     buildcount = int(f.read())
@@ -117,3 +117,6 @@ if len(pl_home)>0:
     PostList(pl_home[buildcount%len(pl_home)]).build()
 if len(pl_cate)>0:
     PostList(pl_cate[buildcount%len(pl_cate)]).build()
+
+with open('buildcount.txt', 'w') as f:
+    f.write(str(buildcount+1))
