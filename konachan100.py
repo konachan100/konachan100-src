@@ -94,9 +94,9 @@ class PostList:
 
     def build(self):
         if not os.path.exists(self.build_path):
-            os.mkdir(self.build_path)
+            os.mkdirs(self.build_path)
         if not os.path.exists(self.build_path+"m/"):
-            os.mkdir(self.build_path+"m/")
+            os.mkdirs(self.build_path+"m/")
         
             
         data = self.get_data()
