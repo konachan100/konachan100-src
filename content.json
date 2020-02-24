@@ -43,7 +43,7 @@
             "rating":"s",
             "name":"Scenic",
             "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20scenic",
-            "build_path":"../c/senic/"
+            "build_path":"../c/scenic/"
         },
         {
             "rating":"s",
