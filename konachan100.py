@@ -14,15 +14,13 @@ def webread(url, readtimeout=30):
                          ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')]
     return opener.open(url, None, readtimeout).read()
 
-option = None
-with open("option.json", "r") as op:
-    option = json.loads(op.read())
+content_cfg = None
+with open("content.json", "r") as op:
+    content_cfg = json.loads(op.read())
 
-output_pages = ['s', 'q']
-if option["output"]:
-    output_pages =  option["output"]
+allow_ratings = content_cfg["allow_ratings"]
 
-print("build targets: ", output_pages)
+print("build targets: ", allow_ratings)
 
 loader = FileSystemLoader('./templates')
 env = Environment(loader = loader)
@@ -105,9 +103,7 @@ class PostList:
         self.render_pc(data)
         self.render_mobile(data)
        
-content_cfg = None
-with open("content.json", "r") as op:
-    content_cfg = json.loads(op.read())
+
 
 ## test
 
