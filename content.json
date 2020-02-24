@@ -26,6 +26,30 @@
             "name":"Most Popular Posts",
             "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20order:score",
             "build_path":"../c/most_popular_posts/"
+        },
+        {
+            "rating":"q",
+            "name":"Most Popular Posts",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:questionable%20order:score",
+            "build_path":"../c/most_popular_posts/q/"
+        },
+        {
+            "rating":"s",
+            "name":"Touhou",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20touhou",
+            "build_path":"../c/touhou/"
+        },
+        {
+            "rating":"s",
+            "name":"Senic",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20senic",
+            "build_path":"../c/senic/"
+        },
+        {
+            "rating":"s",
+            "name":"Author|BattlequeenYume",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20BattlequeenYume",
+            "build_path":"../c/author/battlequeenyum/"
         }
     ]
 }
