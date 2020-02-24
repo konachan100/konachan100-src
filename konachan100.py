@@ -33,7 +33,7 @@ if not os.path.exists('buildcount.txt'):
 buildcount = 0
 with open('buildcount.txt', 'r') as f:
     buildcount = int(f.read())
-
+print('Build count: ', buildcount)
 
 class PostList:
     def __init__(self):
