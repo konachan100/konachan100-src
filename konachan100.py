@@ -112,10 +112,13 @@ class PostList:
 pl_home = content_cfg['home']
 pl_cate = content_cfg['categoaries']
 
+current_build_index = (buildcount%len(pl_home), buildcount%len(pl_cate))
+print('Current build: Home[%d], Categoary[%d]'%current_build_index)
+
 if len(pl_home)>0:
-    PostList(pl_home[buildcount%len(pl_home)]).build()
+    PostList(pl_home[current_build_index[0]]).build()
 if len(pl_cate)>0:
-    PostList(pl_cate[buildcount%len(pl_cate)]).build()
+    PostList(pl_cate[current_build_index[1]]).build()
 
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount+1))
