@@ -94,11 +94,10 @@ class PostList:
 
     def build(self):
         if not os.path.exists(self.build_path):
-            os.mkdirs(self.build_path)
+            os.makedirs(self.build_path)
         if not os.path.exists(self.build_path+"m/"):
-            os.mkdirs(self.build_path+"m/")
-        
-            
+            os.makedirs(self.build_path+"m/")
+                    
         data = self.get_data()
         self.render_pc(data)
         self.render_mobile(data)
