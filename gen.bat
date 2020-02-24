@@ -1,2 +1,2 @@
 git pull
-python pagegen.py
+python konachan100.py

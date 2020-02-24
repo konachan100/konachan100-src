@@ -1,0 +1,31 @@
+{
+    "allow_ratings":["s", "q", "e"],
+    "home":[
+        {
+            "rating":"s",
+            "name":"Recent Posts",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe",
+            "build_path":"../"           
+        },
+        {
+            "rating":"q",
+            "name":"Recent Questionable Posts",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:questionable",
+            "build_path":"../q/"
+        },
+        {
+            "rating":"e",
+            "name":"Recent Explicit Posts",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:explicit",
+            "build_path":"../e/"
+        }
+    ],
+    "categoaries":[
+        {
+            "rating":"s",
+            "name":"Most Popular Posts",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe order:score",
+            "build_path":"../c/most_popular_posts/"
+        }
+    ]
+}
