@@ -24,7 +24,7 @@
         {
             "rating":"s",
             "name":"Most Popular Posts",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe order:score",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20order:score",
             "build_path":"../c/most_popular_posts/"
         }
     ]
