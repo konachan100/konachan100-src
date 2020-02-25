@@ -1,5 +1,7 @@
 import sys
 from jinja2 import Environment, FileSystemLoader
+import urllib
+import urllib.request
 import os
 import os.path
 import json
