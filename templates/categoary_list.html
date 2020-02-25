@@ -8,7 +8,9 @@
 
 <body>
     {% for c in categoary_list %}
-    <a href="{{c['build_path']}}">{{c['name']}}</a>
+    <div>
+        <a href="{{c['build_path']}}">{{c['name']}}</a>
+    </div>
     {% endfor %}
 </body>
 
