@@ -47,9 +47,9 @@
         },
         {
             "rating":"s",
-            "name":"Author|BattlequeenYume",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20BattlequeenYume",
-            "build_path":"../c/author/battlequeenyum/"
+            "name":"Artist|natsumoka",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20natsumoka",
+            "build_path":"../c/artist/natsumoka/"
         }
     ]
 }
