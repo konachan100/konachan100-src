@@ -2,7 +2,6 @@ import sys
 from jinja2 import Environment, FileSystemLoader
 import os
 import os.path
-from konachan import *
 import json
 import codecs
 
