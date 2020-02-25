@@ -26,6 +26,7 @@ loader = FileSystemLoader('./templates')
 env = Environment(loader = loader)
 template_pc = env.get_template('postlist.html')
 template_mobile = env.get_template('postlist_mobile.html')
+template_categoaries = env.get_template('categoary_list.html')
 
 if not os.path.exists('buildcount.txt'):
     with open('buildcount.txt', 'w') as f:
@@ -122,3 +123,7 @@ if len(pl_cate)>0:
 
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount+1))
+
+page = template_categoaries.render(categoary_list = pl_cate)
+with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
+    fn.write(page)
