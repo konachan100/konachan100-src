@@ -125,7 +125,7 @@ class DataView:
             print("show posts order by time, reverse")
             self.data.sort(key = (lambda d:d['created_at']), reverse = True)
         self.rating = {"s":[], "q":[], "e":[]}
-        for d in data:
+        for d in self.data:
             self.rating[d["rating"]].append(d)
         self.overflow = 100000000
         for r in self.rating:
