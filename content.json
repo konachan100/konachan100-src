@@ -22,10 +22,22 @@
     ],
     "categoaries":[
         {
-            "rating":"e",
+            "rating":"s",
             "name":"Popular Recent",
-            "url":"http://konachan.net/post/popular_recent.json",
+            "url":"http://konachan.net/post/popular_recent.json?limit=100&tags=rating:safe",
             "build_path":"../c/popular_recent/"
+        },
+        {
+            "rating":"q",
+            "name":"Popular Recent (q)",
+            "url":"http://konachan.net/post/popular_recent.json?limit=100&tags=rating:questionable",
+            "build_path":"../c/popular_recent/q/"
+        },
+        {
+            "rating":"e",
+            "name":"Popular Recent (e)",
+            "url":"http://konachan.net/post/popular_recent.json?limit=100&tags=rating:explicit",
+            "build_path":"../c/popular_recent/e/"
         },
         {
             "rating":"s",
