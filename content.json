@@ -20,41 +20,25 @@
             "build_path":"../e/"
         }
     ],
-    "categoaries":[
+    "categoaries":[       
         {
-            "rating":"s",
-            "name":"Popular",
-            "url":"http://konachan.net/post/popular_by_month.json",
-            "build_path":"../c/popular_recent/"
+            "name":"Hot",
+            "url":"http://www.konachan.net/post.json",
+            "build_path":"../c/hot/"
         },      
         {
-            "rating":"s",
-            "name":"Most Popular Posts",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20order:score",
-            "build_path":"../c/most_popular_posts/"
-        },
-        {
-            "rating":"q",
-            "name":"Most Popular Posts",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:questionable%20order:score",
-            "build_path":"../c/most_popular_posts/q/"
-        },
-        {
-            "rating":"s",
             "name":"Touhou",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20touhou",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=touhou",
             "build_path":"../c/touhou/"
         },
         {
-            "rating":"s",
             "name":"Scenic",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20scenic",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=scenic",
             "build_path":"../c/scenic/"
         },
         {
-            "rating":"s",
             "name":"Artist|natsumoka",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20natsumoka",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=natsumoka",
             "build_path":"../c/artist/natsumoka/"
         }
     ]

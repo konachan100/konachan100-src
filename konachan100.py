@@ -38,19 +38,20 @@ with open('buildcount.txt', 'r') as f:
 print('Build count: ', buildcount)
 
 class PostList:
-    def __init__(self):
-        self.url = ''
-        self.name = ''
-        self.rating = ''
-        self.build_path = ''
-        self.target = ''
-        self.othertargets = []
+    # def __init__(self):
+    #     self.url = ''
+    #     self.name = ''
+    #     self.rating = ''
+    #     self.build_path = ''
+    #     self.target = ''
+    #     self.othertargets = []
 
-    def __init__(self, cfg):
-        self.url = cfg['url']
-        self.name = cfg['name']
-        self.rating = cfg['rating']
-        self.build_path = cfg['build_path']
+    def __init__(self, cfg = None):
+        if cfg:
+            self.url = cfg['url']
+            self.name = cfg['name']
+            self.rating = cfg['rating']
+            self.build_path = cfg['build_path']
         self.target = ''
         self.othertargets = []
     
@@ -104,8 +105,74 @@ class PostList:
         self.render_pc(data)
         self.render_mobile(data)
        
+class PostCategoary:
+    def __init__(self, cfg):
+        self.post_list = []
+        self.url = cfg['url']
+        self.name = cfg['name']
+        # self.rating = cfg['rating']
+        self.build_path = cfg['build_path']
+        self.usecache = "cache" in cfg
 
+        #if self.rating == 'all':
+        self.post_list = [PostList(), PostList(), PostList()]
+        self.post_list[0].build_path = self.build_path
+        self.post_list[1].build_path = self.build_path+'q/'
+        self.post_list[2].build_path = self.build_path+'e/'
+        #else:
+        #    self.post_list = [PostList(cfg)]
 
+    def get_data(self):
+        try:
+            print("Loading URL: "+ self.url)
+            result = webread(self.url).decode()
+            print("Success, decoding JSON")
+            data = json.loads(result)
+            return data
+        except Exception as e:
+            print("Failed, "+str(e))
+            return None
+    
+    def update_cache(self, data):
+        cached_list = []
+        data_dir = {}
+        cache_file = self.build_path+"cache.json"
+        print('update cache file ', cache_file)
+        if os.path.exists(cache_file):
+            with open(cache_file, 'r') as f:
+                cached_list = json.loads(f.read())
+            for p in data:
+                data_dir[p["id"]] = p
+        for cl in cached_list:
+            if cl["id"] not in data_dir:
+                data.append(cl)
+        with open(cache_file, 'w') as f:
+            print('new cache size ', len(data))
+            f.write(json.dumps(data, indent = 4))
+        return data       
+
+    def build(self):
+        if not os.path.exists(self.build_path):
+            os.makedirs(self.build_path)
+        subdirs = ["m/", "q/", "q/m/", "e/", "e/m/"]
+        for sd in subdirs:
+            if not os.path.exists(self.build_path+sd):
+                os.makedirs(self.build_path+sd)
+        data = self.get_data()
+        if data is None:
+            return
+        self.update_cache(data)
+        data_dict = {"s":[], "q":[], "e":[]}
+        for d in data:
+            if d['rating'] in data_dict:
+                data_dict[d['rating']].append(d)
+        data_list = [data_dict["s"], data_dict["q"], data_dict["e"]]
+        for i in range(min(3, len(self.post_list))):
+            dl = data_list[i]
+            if len(dl)>100:
+                dl = dl[0:100]
+            self.post_list[i].render_pc(dl)
+            self.post_list[i].render_mobile(dl)
 ## test
 
 # p = PostList(content_cfg['home'][0])
@@ -120,7 +187,7 @@ print('Current build: Home[%d], Categoary[%d]'%current_build_index)
 if len(pl_home)>0:
     PostList(pl_home[current_build_index[0]]).build()
 if len(pl_cate)>0:
-    PostList(pl_cate[current_build_index[1]]).build()
+    PostCategoary(pl_cate[current_build_index[1]]).build()
 
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount+1))
