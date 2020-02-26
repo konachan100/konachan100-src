@@ -23,23 +23,39 @@
     "categoaries":[       
         {
             "name":"Hot",
-            "url":"http://www.konachan.net/post.json",
+            "build_path":"../c/hot/",
+            "view":"hscore",
+            "disard":"old"
+        },      
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe",
+            "build_path":"../c/hot/"
+        },      
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:questionable",
+            "build_path":"../c/hot/"
+        },      
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=rating:explicit",
             "build_path":"../c/hot/"
         },      
         {
             "name":"Touhou",
             "url":"http://www.konachan.net/post.json?limit=100&tags=touhou",
-            "build_path":"../c/touhou/"
+            "build_path":"../c/touhou/",
+            "disard":"old"
         },
         {
             "name":"Scenic",
             "url":"http://www.konachan.net/post.json?limit=100&tags=scenic",
-            "build_path":"../c/scenic/"
+            "build_path":"../c/scenic/",
+            "disard":"old"
         },
         {
             "name":"Artist|natsumoka",
             "url":"http://www.konachan.net/post.json?limit=100&tags=natsumoka",
-            "build_path":"../c/artist/natsumoka/"
+            "build_path":"../c/artist/natsumoka/",
+            "disard":"old"
         }
     ]
 }
