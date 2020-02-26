@@ -103,7 +103,7 @@ class PostList:
     def dump_postlist(self, post_list):
         output = self.build_path+'post.json'
         with codecs.open(output, 'w', 'utf-8') as fn:
-            fn.write(json.dumps(output, indent = 4))
+            fn.write(json.dumps(post_list, indent = 4))
 
     def build(self):
         if not os.path.exists(self.build_path):
