@@ -127,16 +127,18 @@ class DataView:
         self.rating = {"s":[], "q":[], "e":[]}
         for d in self.data:
             self.rating[d["rating"]].append(d)
-        self.overflow = 100000000
+        self.overflow = 0
         for r in self.rating:
-            of = len(self.rating[r])- 100
-            if of >0 and of < self.overflow:
+            of = len(self.rating[r])- 500
+            if  of < self.overflow:
                 self.overflow = of
-
+        if self.overflow<0:
+            self.overflow = 0
+            
 class DataDiscard:
     def __init__(self, data, discardtype, overflow, minsize):
         self.data = list(data)
-        if discardtype is None or overflow + minsize>len(data):
+        if discardtype is None or overflow<=0 or minsize>len(data):
             self.cuted = False
             return
         self.cuted = True
