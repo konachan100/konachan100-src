@@ -119,8 +119,10 @@ class DataView:
     def __init__(self, data, viewtype):
         self.data =list(data)
         if viewtype == "hscore":
+            print("show posts order by score, reverse")
             self.data.sort(key = (lambda d:d['score']), reverse = True)
         else:
+            print("show posts order by time, reverse")
             self.data.sort(key = (lambda d:d['created_at']), reverse = True)
         self.rating = {"s":[], "q":[], "e":[]}
         for d in data:
