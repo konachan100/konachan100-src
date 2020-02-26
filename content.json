@@ -22,6 +22,12 @@
     ],
     "categoaries":[
         {
+            "rating":"e",
+            "name":"Popular Recent",
+            "url":"http://konachan.net/post/popular_recent.json",
+            "build_path":"../c/popular_recent/"
+        },
+        {
             "rating":"s",
             "name":"Most Popular Posts",
             "url":"http://www.konachan.net/post.json?limit=100&tags=rating:safe%20order:score",
