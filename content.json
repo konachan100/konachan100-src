@@ -43,7 +43,8 @@
             "name":"Touhou",
             "url":"http://www.konachan.net/post.json?limit=100&tags=touhou",
             "build_path":"../c/touhou/",
-            "disard":"old"
+            "disard":"old",
+            "audio":"http://stream.gensokyoradio.net:8000/stream/1/"
         },
         {
             "name":"Scenic",
@@ -55,6 +56,18 @@
             "name":"Artist|natsumoka",
             "url":"http://www.konachan.net/post.json?limit=100&tags=natsumoka",
             "build_path":"../c/artist/natsumoka/",
+            "disard":"old"
+        },
+        {
+            "name":"Artist|anmi",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=anmi",
+            "build_path":"../c/artist/anmi/",
+            "disard":"old"
+        },
+        {
+            "name":"Artist|annin_doufu",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=annin_doufu",
+            "build_path":"../c/artist/annin_doufu/",
             "disard":"old"
         }
     ]

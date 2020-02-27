@@ -200,6 +200,13 @@
         </div>
     </div>
     {% endif %}
+
+    {% if audio %}
+    <audio autoplay="" name="media" controls="">
+        <source src="{{audio}}" type="audio/mpeg">
+    </audio>
+    {% endif %}
+
 </body>
 
 </html>

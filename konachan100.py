@@ -71,7 +71,7 @@ class PostList:
             print("Failed, "+str(e))
             return None
 
-    def render_pc(self, post_list):
+    def render_pc(self, post_list, audio = None):
         if post_list is None:
             return
         row = []
@@ -85,7 +85,7 @@ class PostList:
             row.append(col)
         output = self.build_path+'index.html'
         print("Rendering to "+output)
-        page = template_pc.render(postrow = row, target = self.target, othertargets = self.othertargets)
+        page = template_pc.render(postrow = row, target = self.target, othertargets = self.othertargets, audio = audio)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
         print("Page refreshed")
@@ -134,7 +134,7 @@ class DataView:
                 self.overflow = of
         if self.overflow<0:
             self.overflow = 0
-            
+
 class DataDiscard:
     def __init__(self, data, discardtype, overflow, minsize):
         self.data = list(data)
@@ -165,7 +165,9 @@ class PostCategoary:
         self.discardtype = None
         if "discard" in cfg:
             self.discardtype = cfg["discard"]
-
+        self.audio = None
+        if "audio" in cfg:
+            self.audio = cfg["audio"]
         #if self.rating == 'all':
         self.post_list = [PostList(), PostList(), PostList()]
         self.post_list[0].build_path = self.build_path
@@ -233,7 +235,7 @@ class PostCategoary:
             dl = data_list[i]
             if len(dl)>100:
                 dl = dl[0:100]
-            self.post_list[i].render_pc(dl)
+            self.post_list[i].render_pc(dl, self.audio)
             self.post_list[i].render_mobile(dl)
             self.post_list[i].dump_postlist(dl)
 ## test
