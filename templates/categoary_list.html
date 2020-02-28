@@ -8,9 +8,11 @@
 
 <body>
     {% for c in categoary_list %}
+    {% if c['name']%}
     <div>
         <a href="{{c['build_path']}}">{{c['name']}}</a>
     </div>
+    {% endif %}
     {% endfor %}
 </body>
 

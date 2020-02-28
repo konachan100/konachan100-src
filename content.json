@@ -44,7 +44,7 @@
             "url":"http://www.konachan.net/post.json?limit=100&tags=touhou",
             "build_path":"../c/touhou/",
             "disard":"old",
-            "audio":"http://stream.gensokyoradio.net:8000/stream/1/"
+            "audio":"http://118.24.151.185:8000/stream/1/"
         },
         {
             "name":"Scenic",
@@ -65,10 +65,18 @@
             "disard":"old"
         },
         {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=anmi&page=2",
+            "build_path":"../c/artist/anmi/"
+        },
+        {
             "name":"Artist|annin_doufu",
             "url":"http://www.konachan.net/post.json?limit=100&tags=annin_doufu",
             "build_path":"../c/artist/annin_doufu/",
             "disard":"old"
+        },
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=annin_doufu&page=2",
+            "build_path":"../c/artist/annin_doufu/"
         }
     ]
 }

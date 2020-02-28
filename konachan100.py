@@ -204,6 +204,8 @@ class PostCategoary:
             for cl in cached_list:
                 if cl["id"] not in data_dir:
                     data.append(cl)
+        if not os.path.exists(self.build_path):
+            os.makedirs(self.build_path)
         with open(cache_file, 'w') as f:
             print('new cache size ', len(data))
             f.write(json.dumps(data, indent = 4))
