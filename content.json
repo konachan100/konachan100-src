@@ -87,6 +87,16 @@
         {
             "url":"http://www.konachan.net/post.json?limit=100&tags=miwabe_sakura&page=2",
             "build_path":"../c/artist/miwabe_sakura/"
+        },
+        {
+            "name":"Artist|edel_(qi--yu)",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=edel_(qi--yu)",
+            "build_path":"../c/artist/edel_(qi--yu)/",
+            "disard":"old"
+        },
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=edel_(qi--yu)&page=2",
+            "build_path":"../c/artist/edel_(qi--yu)/"
         }
     ]
 }
