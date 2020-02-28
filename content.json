@@ -97,6 +97,26 @@
         {
             "url":"http://www.konachan.net/post.json?limit=100&tags=edel_(qi--yu)&page=2",
             "build_path":"../c/artist/edel_(qi--yu)/"
+        },
+        {
+            "name":"Artist|sousouman",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=sousouman",
+            "build_path":"../c/artist/sousouman/",
+            "disard":"old"
+        },
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=sousouman&page=2",
+            "build_path":"../c/artist/sousouman/"
+        },
+        {
+            "name":"Artist|ke-ta",
+            "url":"http://www.konachan.net/post.json?limit=100&tags=ke-ta",
+            "build_path":"../c/artist/ke-ta/",
+            "disard":"old"
+        },
+        {
+            "url":"http://www.konachan.net/post.json?limit=100&tags=ke-ta&page=2",
+            "build_path":"../c/artist/ke-ta/"
         }
     ]
 }
