@@ -150,24 +150,8 @@ class DataDiscard:
 class PostCategoary:
     def __init__(self, cfg):
         self.post_list = []
-        self.url = None
-        if 'url' in cfg:
-            self.url = cfg['url']
-        self.name = None
-        if 'name' in cfg:
-            self.name = cfg['name']
-        # self.rating = cfg['rating']
-        self.build_path = cfg['build_path']
-        self.usecache = "cache" in cfg
-        self.viewtype = None
-        if "view" in cfg:
-            self.viewtype = cfg["view"]
-        self.discardtype = None
-        if "discard" in cfg:
-            self.discardtype = cfg["discard"]
-        self.audio = None
-        if "audio" in cfg:
-            self.audio = cfg["audio"]
+        self.init_base(cfg)
+        self.init_artist(cfg)
         #if self.rating == 'all':
         self.post_list = [PostList(), PostList(), PostList()]
         self.post_list[0].build_path = self.build_path
@@ -175,6 +159,45 @@ class PostCategoary:
         self.post_list[2].build_path = self.build_path+'e/'
         #else:
         #    self.post_list = [PostList(cfg)]
+
+    def init_artist(self, cfg):
+        if not 'artist' in cfg:
+            return
+        if not 'page' in cfg:
+            self.name = "Artist|"+cfg['artist']
+        else:
+            self.name = None
+        self.build_path = "../c/artist/%s/"%(cfg['artist'],)
+        if 'page' in cfg:
+            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s&page=%d"%(cfg['artist'], cfg['page'])
+        else:
+            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s"%(cfg['artist'],)
+
+    def init_base(self, cfg):
+        self.url = None
+        if 'url' in cfg:
+            self.url = cfg['url']
+        self.name = None
+        if 'name' in cfg:
+            self.name = cfg['name']
+        # self.rating = cfg['rating']
+        self.build_path = None
+        if 'build_path' in cfg:
+            self.build_path = cfg['build_path']
+        self.cache = None
+        if 'cache' in cfg:
+            self.usecache = "cache" in cfg
+        self.viewtype = None
+        if "view" in cfg:
+            self.viewtype = cfg["view"]
+        self.discardtype = None
+        if "discard" in cfg:
+            self.discardtype = cfg["discard"]
+        else:
+            self.discardtype = 'old'
+        self.audio = None
+        if "audio" in cfg:
+            self.audio = cfg["audio"]
 
     def get_data(self):
         if self.url is None:
@@ -247,6 +270,7 @@ class PostCategoary:
 
 pl_home = content_cfg['home']
 pl_cate = content_cfg['categoaries']
+categoaries_obj_list = [PostCategoary(c) for c in pl_cate]
 
 current_build_index = (buildcount%len(pl_home), buildcount%len(pl_cate))
 print('Current build: Home[%d], Categoary[%d]'%current_build_index)
@@ -254,11 +278,15 @@ print('Current build: Home[%d], Categoary[%d]'%current_build_index)
 if len(pl_home)>0:
     PostList(pl_home[current_build_index[0]]).build()
 if len(pl_cate)>0:
-    PostCategoary(pl_cate[current_build_index[1]]).build()
+    categoaries_obj_list[current_build_index[1]].build()
 
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount+1))
 
-page = template_categoaries.render(categoary_list = pl_cate)
+categoary_indices_namemap = {}
+for c in categoaries_obj_list:
+    if c.name and  c.name not in categoaries_obj_list:
+        categoary_indices_namemap[c.name] = c
+page = template_categoaries.render(categoary_indices = categoary_indices_namemap.values())
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
     fn.write(page)

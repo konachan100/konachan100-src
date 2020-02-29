@@ -107,16 +107,22 @@
         {
             "url":"http://www.konachan.net/post.json?limit=100&tags=sousouman&page=2",
             "build_path":"../c/artist/sousouman/"
+        },     
+        {
+            "artist":"ke-ta"
+        },  
+        {
+            "artist":"ke-ta",
+            "page":2
+        },     
+        {
+            "artist":"mauve"
         },
         {
-            "name":"Artist|ke-ta",
-            "url":"http://www.konachan.net/post.json?limit=100&tags=ke-ta",
-            "build_path":"../c/artist/ke-ta/",
-            "disard":"old"
+            "artist":"onineko"
         },
         {
-            "url":"http://www.konachan.net/post.json?limit=100&tags=ke-ta&page=2",
-            "build_path":"../c/artist/ke-ta/"
+            "artist":"miyase_mahiro"
         }
     ]
 }

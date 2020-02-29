@@ -7,12 +7,10 @@
 </head>
 
 <body>
-    {% for c in categoary_list %}
-    {% if c['name']%}
+    {% for c in categoary_indices %}   
     <div>
-        <a href="{{c['build_path']}}">{{c['name']}}</a>
+        <a href="{{c.build_path}}">{{c.name}}</a>
     </div>
-    {% endif %}
     {% endfor %}
 </body>
 
