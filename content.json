@@ -48,7 +48,22 @@
             "url": "http://www.konachan.net/post.json?limit=100&tags=touhou",
             "build_path": "../c/touhou/",
             "disard": "old",
-            "audio": "http://118.24.151.185:8000/stream/1/"
+            "audio": [
+                {
+                    "name": "Gensokyo Radio",
+                    "artist": "Gensokyo Radio",
+                    "loop": "one",
+                    "url": "http://118.24.151.185:8000/1/",
+                    "cover": "https://gensokyoradio.net/images/assets/gr-logo.png"
+                },
+                {
+                    "name": "Gensokyo Radio Backup Link",
+                    "artist": "Gensokyo Radio",
+                    "loop": "one",
+                    "url": "http://118.24.151.185:8001/1/",
+                    "cover": "https://gensokyoradio.net/images/assets/gr-logo.png"
+                }
+            ]
         },
         {
             "name": "Scenic",
