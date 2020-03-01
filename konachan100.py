@@ -263,6 +263,17 @@ class PostCategoary:
             self.post_list[i].render_pc(dl, self.audio)
             self.post_list[i].render_mobile(dl)
             self.post_list[i].dump_postlist(dl)
+
+class PostCategoaryArtist(PostCategoary):
+    def __init__(self, artistname, page=None):
+        if page:
+            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s&page=%d"%(artistname, page)
+        else:
+            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s"%(artistname,)
+        self.build_path = "../c/artist/%s/"%(artistname,)
+        self.name = "Artist|"+artistname
+        self.discardtype = 'old'
+
 ## test
 
 # p = PostList(content_cfg['home'][0])
@@ -270,7 +281,10 @@ class PostCategoary:
 
 pl_home = content_cfg['home']
 pl_cate = content_cfg['categoaries']
+pl_artists = content_cfg['artists']
+
 categoaries_obj_list = [PostCategoary(c) for c in pl_cate]
+artist_list = [PostCategoaryArtist(c) for c in pl_artists]
 
 current_build_index = (buildcount%len(pl_home), buildcount%len(pl_cate))
 print('Current build: Home[%d], Categoary[%d]'%current_build_index)
