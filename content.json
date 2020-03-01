@@ -66,6 +66,23 @@
             ]
         },
         {
+            "name": "Nekopara",
+            "build_path": "../c/hot/",
+            "disard": "old"
+        },
+        {
+            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+rating:safe",
+            "build_path": "../c/nekopara/"
+        },
+        {
+            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+rating:questionable",
+            "build_path": "../c/nekopara/"
+        },
+        {
+            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+rating:explicit",
+            "build_path": "../c/nekopara/"
+        },
+        {
             "name": "Scenic",
             "url": "http://www.konachan.net/post.json?limit=100&tags=scenic",
             "build_path": "../c/scenic/",
