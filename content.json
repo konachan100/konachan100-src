@@ -67,7 +67,7 @@
         },
         {
             "name": "Nekopara",
-            "build_path": "../c/hot/",
+            "build_path": "../c/nekopara/",
             "disard": "old"
         },
         {
