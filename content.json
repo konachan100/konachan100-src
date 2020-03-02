@@ -66,12 +66,6 @@
             ]
         },
         {
-            "name": "Nekopara Game CG",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg",
-            "build_path": "../c/nekopara_gamecg/",
-            "disard": "old"
-        },
-        {
             "name": "Scenic",
             "url": "http://www.konachan.net/post.json?limit=100&tags=scenic",
             "build_path": "../c/scenic/",
@@ -94,12 +88,18 @@
         "mivit",
         "hiten_goane_ryu",
         "fujisaki_hikari",
-        "higandgk",
+        "higandgk"
     ],
     "loadonce":[
         {
             "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg&page=2",
             "build_path": "../c/nekopara_gamecg/"
+        },        
+        {
+            "name": "Nekopara Game CG",
+            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg",
+            "build_path": "../c/nekopara_gamecg/",
+            "disard": "old"
         }
     ]
 }

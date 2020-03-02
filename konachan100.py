@@ -285,18 +285,21 @@ class PostCategoaryArtist(PostCategoary):
 # p = PostList(content_cfg['home'][0])
 # p.build()
 
-pl_home = content_cfg['home']
-pl_cate = content_cfg['categoaries']
-pl_artists = content_cfg['artists']
+cfg_home = content_cfg['home']
+cfg_cate = content_cfg['categoaries']
+cfg_artists = content_cfg['artists']
+cfg_loadonce = content_cfg['loadonce']
 
-categoaries_obj_list = [PostCategoary(c) for c in pl_cate]
-artist_list = [PostCategoaryArtist(c) for c in pl_artists]
+categoaries_obj_list = [PostCategoary(c) for c in cfg_cate]
+artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
 build_list = categoaries_obj_list + artist_list
-current_build_index = (buildcount%len(pl_home), buildcount%len(build_list))
+if buildcount<len(cfg_loadonce):
+    build_list = cfg_loadonce
+current_build_index = (buildcount%len(cfg_home), buildcount%len(build_list))
 print('Current build: Home[%d], Categoary[%d]'%current_build_index)
 
-if len(pl_home)>0:
-    PostList(pl_home[current_build_index[0]]).build()
+if len(cfg_home)>0:
+    PostList(cfg_home[current_build_index[0]]).build()
 if len(build_list)>0:
     build_list[current_build_index[1]].build()
 
