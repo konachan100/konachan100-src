@@ -1,4 +1,5 @@
 {
+    "host":"http://www.konachan.net",
     "allow_ratings": [
         "s",
         "q",
@@ -8,33 +9,33 @@
         {
             "rating": "s",
             "name": "Recent Posts",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:safe",
+            "url": "<host>/post.json?limit=100&tags=rating:safe",
             "build_path": "../"
         },
         {
             "rating": "q",
             "name": "Recent Questionable Posts",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:questionable",
+            "url": "<host>/post.json?limit=100&tags=rating:questionable",
             "build_path": "../q/"
         },
         {
             "rating": "e",
             "name": "Recent Explicit Posts",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:explicit",
+            "url": "<host>/post.json?limit=100&tags=rating:explicit",
             "build_path": "../e/"
         }
     ],
     "categoaries": [
         {
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:safe",
+            "url": "<host>/post.json?limit=100&tags=rating:safe",
             "build_path": "../c/hot/"
         },
         {
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:questionable",
+            "url": "<host>/post.json?limit=100&tags=rating:questionable",
             "build_path": "../c/hot/"
         },
         {
-            "url": "http://www.konachan.net/post.json?limit=100&tags=rating:explicit",
+            "url": "<host>/post.json?limit=100&tags=rating:explicit",
             "build_path": "../c/hot/"
         },
         {
@@ -45,7 +46,7 @@
         },
         {
             "name": "Touhou",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=touhou",
+            "url": "<host>/post.json?limit=100&tags=touhou",
             "build_path": "../c/touhou/",
             "disard": "old",
             "audio": [
@@ -67,7 +68,7 @@
         },
         {
             "name": "Scenic",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=scenic",
+            "url": "<host>/post.json?limit=100&tags=scenic",
             "build_path": "../c/scenic/",
             "disard": "old"
         }
@@ -95,12 +96,12 @@
     ],
     "loadonce":[
         {
-            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg&page=2",
+            "url": "<host>/post.json?limit=100&tags=nekopara+game_cg&page=2",
             "build_path": "../c/nekopara_gamecg/"
         },        
         {
             "name": "Nekopara Game CG",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg",
+            "url": "<host>/post.json?limit=100&tags=nekopara+game_cg",
             "build_path": "../c/nekopara_gamecg/",
             "disard": "old"
         }

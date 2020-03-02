@@ -25,6 +25,11 @@ with open("content.json", "r") as op:
     content_cfg = json.loads(op.read())
 
 allow_ratings = content_cfg["allow_ratings"]
+cfg_host = content_cfg['host']
+cfg_home = content_cfg['home']
+cfg_cate = content_cfg['categoaries']
+cfg_artists = content_cfg['artists']
+cfg_loadonce = content_cfg['loadonce']
 
 print("build targets: ", allow_ratings)
 
@@ -53,7 +58,7 @@ class PostList:
 
     def __init__(self, cfg = None):
         if cfg:
-            self.url = cfg['url']
+            self.url = cfg['url'].replace('<host>', cfg_host)
             self.name = cfg['name']
             self.rating = cfg['rating']
             self.build_path = cfg['build_path']
@@ -148,56 +153,74 @@ class DataDiscard:
             self.data = self.data[0:preservesize]
 
 class PostCategoary:
-    def __init__(self, cfg):
+    def __init__(self, cfg=None):
+        self.url = None
+        self.name = None
+        self.build_path = None
+        self.cache = None
+        self.viewtype = None
+        self.discardtype = None
+        self.audio = None
         self.post_list = []
-        self.init_base(cfg)
-        self.init_artist(cfg)
+
         #if self.rating == 'all':
+        
+        if cfg is not None:
+            self.load_cfg(cfg)
+        #else:
+        #    self.post_list = [PostList(cfg)]
+    def setup_postlist(self):
         self.post_list = [PostList(), PostList(), PostList()]
         self.post_list[0].build_path = self.build_path
         self.post_list[1].build_path = self.build_path+'q/'
         self.post_list[2].build_path = self.build_path+'e/'
-        #else:
-        #    self.post_list = [PostList(cfg)]
 
-    def init_artist(self, cfg):
-        if not 'artist' in cfg:
-            return
-        if not 'page' in cfg:
-            self.name = "Artist|"+cfg['artist']
-        else:
-            self.name = None
-        self.build_path = "../c/artist/%s/"%(cfg['artist'],)
-        if 'page' in cfg:
-            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s&page=%d"%(cfg['artist'], cfg['page'])
-        else:
-            self.url = "http://www.konachan.net/post.json?limit=100&tags=%s"%(cfg['artist'],)
-
-    def init_base(self, cfg):
-        self.url = None
+    def load_cfg(self, cfg):
         if 'url' in cfg:
-            self.url = cfg['url']
-        self.name = None
+            self.url = cfg['url'].replace('<host>', cfg_host)
         if 'name' in cfg:
             self.name = cfg['name']
         # self.rating = cfg['rating']
-        self.build_path = None
         if 'build_path' in cfg:
             self.build_path = cfg['build_path']
-        self.cache = None
+            self.setup_postlist()
         if 'cache' in cfg:
             self.usecache = "cache" in cfg
-        self.viewtype = None
         if "view" in cfg:
             self.viewtype = cfg["view"]
-        self.discardtype = None
         if "discard" in cfg:
             self.discardtype = cfg["discard"]
         else:
             self.discardtype = 'old'
-        self.audio = None
         if "audio" in cfg:
             self.audio = cfg["audio"]
+
+    # def init_base(self, cfg):
+    #     self.url = None
+    #     self.name = None
+    #     self.build_path = None
+    #     self.cache = None
+    #     self.viewtype = None
+    #     self.discardtype = None
+    #     self.audio = None
+
+    #     if 'url' in cfg:
+    #         self.url = cfg['url']
+    #     if 'name' in cfg:
+    #         self.name = cfg['name']
+    #     # self.rating = cfg['rating']
+    #     if 'build_path' in cfg:
+    #         self.build_path = cfg['build_path']
+    #     if 'cache' in cfg:
+    #         self.usecache = "cache" in cfg
+    #     if "view" in cfg:
+    #         self.viewtype = cfg["view"]
+    #     if "discard" in cfg:
+    #         self.discardtype = cfg["discard"]
+    #     else:
+    #         self.discardtype = 'old'
+    #     if "audio" in cfg:
+    #         self.audio = cfg["audio"]
 
     def get_data(self):
         if self.url is None:
@@ -266,29 +289,28 @@ class PostCategoary:
 
 class PostCategoaryArtist(PostCategoary):
     def __init__(self, artistname, page=None):
+        super().__init__()
         if page:
             self.url = "http://www.konachan.net/post.json?limit=100&tags=%s&page=%d"%(artistname, page)
         else:
             self.url = "http://www.konachan.net/post.json?limit=100&tags=%s"%(artistname,)
         self.build_path = "../c/artist/%s/"%(artistname,)
+        self.setup_postlist()
         self.name = "Artist|"+artistname
-        self.discardtype = 'old'
-        self.viewtype = None
-        self.post_list = [PostList(), PostList(), PostList()]
-        self.post_list[0].build_path = self.build_path
-        self.post_list[1].build_path = self.build_path+'q/'
-        self.post_list[2].build_path = self.build_path+'e/'
-        self.audio = None
+        # self.discardtype = 'old'
+        # self.viewtype = None
+        # self.post_list = [PostList(), PostList(), PostList()]
+        # self.post_list[0].build_path = self.build_path
+        # self.post_list[1].build_path = self.build_path+'q/'
+        # self.post_list[2].build_path = self.build_path+'e/'
+        # self.audio = None
 
 ## test
 
 # p = PostList(content_cfg['home'][0])
 # p.build()
 
-cfg_home = content_cfg['home']
-cfg_cate = content_cfg['categoaries']
-cfg_artists = content_cfg['artists']
-cfg_loadonce = content_cfg['loadonce']
+
 
 categoaries_obj_list = [PostCategoary(c) for c in cfg_cate]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
