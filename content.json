@@ -66,10 +66,6 @@
             ]
         },
         {
-            "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg&page=2",
-            "build_path": "../c/nekopara_gamecg/"
-        },
-        {
             "name": "Nekopara Game CG",
             "url": "http://www.konachan.net/post.json?limit=100&tags=nekopara+game_cg",
             "build_path": "../c/nekopara_gamecg/",
@@ -80,66 +76,6 @@
             "url": "http://www.konachan.net/post.json?limit=100&tags=scenic",
             "build_path": "../c/scenic/",
             "disard": "old"
-        },
-        {
-            "name": "Artist|natsumoka",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=natsumoka",
-            "build_path": "../c/artist/natsumoka/",
-            "disard": "old"
-        },
-        {
-            "name": "Artist|anmi",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=anmi",
-            "build_path": "../c/artist/anmi/",
-            "disard": "old"
-        },
-        {
-            "name": "Artist|annin_doufu",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=annin_doufu",
-            "build_path": "../c/artist/annin_doufu/",
-            "disard": "old"
-        },
-        {
-            "name": "Artist|miwabe_sakura",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=miwabe_sakura",
-            "build_path": "../c/artist/miwabe_sakura/",
-            "disard": "old"
-        },
-        {
-            "name": "Artist|edel_(qi--yu)",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=edel_(qi--yu)",
-            "build_path": "../c/artist/edel_(qi--yu)/",
-            "disard": "old"
-        },
-        {
-            "name": "Artist|sousouman",
-            "url": "http://www.konachan.net/post.json?limit=100&tags=sousouman",
-            "build_path": "../c/artist/sousouman/",
-            "disard": "old"
-        },
-        {
-            "artist": "ke-ta"
-        },
-        {
-            "artist": "mauve"
-        },
-        {
-            "artist": "onineko"
-        },
-        {
-            "artist": "miyase_mahiro"
-        },
-        {
-            "artist": "kino_(kino_konomi)"
-        },
-        {
-            "artist": "ryo"
-        },
-        {
-            "artist": "mivit"
-        },
-        {
-            "artist": "hiten_goane_ryu"
         }
     ],
     "artists":[

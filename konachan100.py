@@ -273,6 +273,12 @@ class PostCategoaryArtist(PostCategoary):
         self.build_path = "../c/artist/%s/"%(artistname,)
         self.name = "Artist|"+artistname
         self.discardtype = 'old'
+        self.viewtype = None
+        self.post_list = [PostList(), PostList(), PostList()]
+        self.post_list[0].build_path = self.build_path
+        self.post_list[1].build_path = self.build_path+'q/'
+        self.post_list[2].build_path = self.build_path+'e/'
+        self.audio = None
 
 ## test
 
@@ -285,21 +291,21 @@ pl_artists = content_cfg['artists']
 
 categoaries_obj_list = [PostCategoary(c) for c in pl_cate]
 artist_list = [PostCategoaryArtist(c) for c in pl_artists]
-
-current_build_index = (buildcount%len(pl_home), buildcount%len(pl_cate))
+build_list = categoaries_obj_list + artist_list
+current_build_index = (buildcount%len(pl_home), buildcount%len(build_list))
 print('Current build: Home[%d], Categoary[%d]'%current_build_index)
 
 if len(pl_home)>0:
     PostList(pl_home[current_build_index[0]]).build()
-if len(pl_cate)>0:
-    categoaries_obj_list[current_build_index[1]].build()
+if len(build_list)>0:
+    build_list[current_build_index[1]].build()
 
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount+1))
 
 categoary_indices_namemap = {}
-for c in categoaries_obj_list:
-    if c.name and  c.name not in categoaries_obj_list:
+for c in build_list:
+    if c.name and  c.name not in build_list:
         categoary_indices_namemap[c.name] = c
 page = template_categoaries.render(categoary_indices = categoary_indices_namemap.values())
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
