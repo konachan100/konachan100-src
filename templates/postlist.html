@@ -82,20 +82,24 @@
         .linkspace {
             padding: 60%;
         }
-        .linkbtn{
+
+        .linkbtn {
             width: 100%;
             height: 100%;
             background-color: transparent;
             border: none;
             font-size: 2rem;
         }
-        audio{
+
+        audio {
             position: fixed;
             top: 0px;
             right: 0px;
         }
     </style>
     <script>
+        document.cookie = window.location.href+'=k100_visited'
+
         var sUserAgent = navigator.userAgent.toLowerCase();
         var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
         var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -151,6 +155,56 @@
         }
 
     </script>
+    <script>
+        function chkHistoryPattern(arr) {
+            let result = false
+
+            for (let i = 0; i < arr.length; i++) {
+                sp = arr[i].split('?')
+                if (sp.length > 1) {
+                    sp = sp[1].split('&')
+                    for (let j = 0; j < sp.length; j++) {
+                        if (sp[j] == 'unlockeq') {
+                            result = true
+                            break
+                        }
+                    }
+                    if (result) {
+                        break
+                    }
+                }
+            }
+            return result
+        }
+
+        function readCookieCfg() {
+            var sp = document.cookie.split(';')
+            var result = []
+            for (let i = 0; i < sp.length; i++) {
+                var sp2 = sp[i].trim().split('=')
+                if (sp2.length > 1) {
+                    if (sp2[1] == 'k100_visited') {
+                        result.push(sp2[0])
+                    }
+                }
+            }
+            return result
+        }
+
+        
+
+        var url_visited = readCookieCfg()
+        
+        window.extraContentUnlocked = chkHistoryPattern(url_visited)
+    </script>
+    {% if rating != "s" %}
+    <script>
+        if (window.extraContentUnlocked!=true) {
+            window.location = '/'
+        }
+    </script>
+    {% endif %}
+    
 </head>
 
 <body>
@@ -158,14 +212,15 @@
 
     {% if audio %}
     <div>
-    <div id="aplayer"></div>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
-    <script>
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true,
-            audio: [
-                {% for entry in audio %}
+        <div id="aplayer"></div>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+        <script>
+            const ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                fixed: true,
+                audio: [
+                    {% for entry in audio %}
                 {
                     name: "{{entry['name']}}",
                     artist: "{{entry['artist']}}",
@@ -176,7 +231,7 @@
                 {% endfor %}           
             ]
         });
-    </script>
+        </script>
     </div>
     {% endif %}
 
@@ -195,46 +250,55 @@
     </div>
     </div>
     {% endfor %}
-    <script>
-        var onClickLinks = function(url){
-            window.location = url
-        }
-        var onClickS = function(){
-            onClickLinks("//konachan100.github.io")
-        }
-        var onClickQ = function(){
-            onClickLinks("//konachan100.github.io/q")
-        }
-        var onClickE = function(){
-            onClickLinks("//konachan100.github.io/e")
-        }
 
-    </script>
-    {% if "e" not in othertargets %}
+
+    {% if rating == "s" %}
     <div id="footer">
         <div id="links">
-            {% if "s" in othertargets %}
             <div class="linkitem">
-                <button class="linkbtn" onclick="onClickS()">S</button>
+                <button class="linkbtn" onclick="window.location='./q'">Q</button>
             </div>
             <div class="linkspace"></div>
-            {% endif %}
-            {% if "q" in othertargets %}
             <div class="linkitem">
-                <button class="linkbtn" onclick="onClickQ()">Q</button>
+                <button class="linkbtn" onclick="window.location='./e'">E</button>
             </div>
-            <div class="linkspace"></div>
-            {% endif %}
-            {% if "e" in othertargets %}
-            <div class="linkitem">
-                <button class="linkbtn" onclick="onClickE()">E</button>
-            </div>
-            {% endif%}
         </div>
     </div>
     {% endif %}
-
-   
+    {% if rating == "q" %}
+    <div id="footer">
+        <div id="links">
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../'">S</button>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../e'">E</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if rating == "e" %}
+    <div id="footer">
+        <div id="links">
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../'">S</button>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../q'">Q</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if rating == "s" or rating == "q" or rating == "e" %}
+    <script>
+        if (window.extraContentUnlocked != true) {
+            var lnk = document.getElementById('links')
+            lnk.remove()
+        }
+    </script>
+    {% endif%}
 
 </body>
 

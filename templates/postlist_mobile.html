@@ -71,9 +71,58 @@
             font-size: 4rem;
         }
     </style>
+    <script>
+        function chkHistoryPattern(arr) {
+            let result = false
+
+            for (let i = 0; i < arr.length; i++) {
+                sp = arr[i].split('?')
+                if (sp.length > 1) {
+                    sp = sp[1].split('&')
+                    for (let j = 0; j < sp.length; j++) {
+                        if (sp[j] == 'unlockeq') {
+                            result = true
+                            break
+                        }
+                    }
+                    if (result) {
+                        break
+                    }
+                }
+            }
+            return result
+        }
+
+        function readCookieCfg() {
+            var sp = document.cookie.split(';')
+            var result = []
+            for (let i = 0; i < sp.length; i++) {
+                var sp2 = sp[i].trim().split('=')
+                if (sp2.length > 1) {
+                    if (sp2[1] == 'k100_visited') {
+                        result.push(sp2[0])
+                    }
+                }
+            }
+            return result
+        }
+
+
+        var url_visited = readCookieCfg()
+        
+        window.extraContentUnlocked = chkHistoryPattern(url_visited)
+    </script>
+    {% if rating != "s" %}
+    <script>
+        if (window.extraContentUnlocked != true) {
+            window.location = '/'
+        }
+    </script>
+    {% endif %}
+
 </head>
 
-<body>
+<body>   
     <img src="https://konachan.net/images/konachan_net_sm_std.png" style="width: 100%; margin-left: -10%">
     {% for p in posts %}
     <div class="img_frame">
@@ -83,45 +132,55 @@
     </div>
     {% endfor %}
 
-    <script>
-        var onClickLinks = function (url) {
-            window.location = url
-        }
-        var onClickS = function () {
-            onClickLinks("//konachan100.github.io")
-        }
-        var onClickQ = function () {
-            onClickLinks("//konachan100.github.io/q")
-        }
-        var onClickE = function () {
-            onClickLinks("//konachan100.github.io/e")
-        }
+   
 
-    </script>
-
-    {% if "e" not in othertargets %}
+    {% if rating == "s" %}
     <div id="footer">
         <div id="links">
-            {% if "s" in othertargets %}
             <div class="linkitem">
-                <button class="linkbtn" onclick="onClickS()">S</button>
+                <button class="linkbtn" onclick="window.location='../q'">Q</button>
             </div>
             <div class="linkspace"></div>
-            {% endif %}
-            {% if "q" in othertargets %}
             <div class="linkitem">
-                <button class="linkbtn" onclick="onClickQ()">Q</button>
+                <button class="linkbtn" onclick="window.location='../e'">E</button>
             </div>
-            <div class="linkspace"></div>
-            {% endif %}
-            {% if "e" in othertargets %}
-            <div class="linkitem">
-                <button class="linkbtn" onclick="onClickE()">E</button>
-            </div>
-            {% endif%}
         </div>
     </div>
     {% endif %}
+    {% if rating == "q" %}
+    <div id="footer">
+        <div id="links">
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../../'">S</button>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../../e'">E</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if rating == "e" %}
+    <div id="footer">
+        <div id="links">
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../../'">S</button>
+            </div>
+            <div class="linkspace"></div>
+            <div class="linkitem">
+                <button class="linkbtn" onclick="window.location='../../q'">Q</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if rating == "s" or rating == "q" or rating == "e" %}
+    <script>
+        if (window.extraContentUnlocked != true) {
+            var lnk = document.getElementById('links')
+            lnk.remove()
+        }
+    </script>
+    {% endif%}
 </body>
 
 </html>
