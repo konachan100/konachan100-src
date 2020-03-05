@@ -67,6 +67,12 @@
             ]
         },
         {
+            "name": "S.A.O.",
+            "url": "<host>/post?limit=100&tags=sword_art_online",
+            "build_path": "../c/sao/",
+            "discard": "old"
+        },
+        {
             "name": "Scenic",
             "url": "<host>/post.json?limit=100&tags=scenic",
             "build_path": "../c/scenic/",
