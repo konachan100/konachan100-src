@@ -70,7 +70,8 @@
             position: fixed;
             bottom: 5%;
             right: 5%;
-            padding: 1%;
+            padding: 1%;    
+            width: 3em;
         }
 
         .linkitem {
@@ -220,7 +221,7 @@
                 container: document.getElementById('aplayer'),
                 fixed: true,
                 audio: [
-                    {% for entry in audio %}
+                {% for entry in audio %}
                 {
                     name: "{{entry['name']}}",
                     artist: "{{entry['artist']}}",

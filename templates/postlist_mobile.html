@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="referrer" content="no-referrer">
     <title>Konachan100</title>
+    {% if audio %}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
+    {% endif %}
     <style>
         body {
             background: #222222;
@@ -70,6 +73,11 @@
             border: none;
             font-size: 4rem;
         }
+
+        #aplayer {
+            transform: scale(2);
+            transform-origin: left bottom;
+        }
     </style>
     <script>
         function chkHistoryPattern(arr) {
@@ -109,7 +117,7 @@
 
 
         var url_visited = readCookieCfg()
-        
+
         window.extraContentUnlocked = chkHistoryPattern(url_visited)
     </script>
     {% if rating != "s" %}
@@ -122,8 +130,34 @@
 
 </head>
 
-<body>   
+<body>
     <img src="https://konachan.net/images/konachan_net_sm_std.png" style="width: 100%; margin-left: -10%">
+
+    {% if audio %}
+    <div>
+        <div id="aplayer"></div>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+        <script>
+            const ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                fixed: true,
+                audio: [
+                    {% for entry in audio %}
+                {
+                    name: "{{entry['name']}}",
+                    artist: "{{entry['artist']}}",
+                    loop: "{{entry['loop']}}",
+                    url: "{{entry['url']}}",
+                    cover: "{{entry['cover']}}"
+                },
+                {% endfor %}           
+            ]
+        });
+        </script>
+    </div>
+    {% endif %}
+
     {% for p in posts %}
     <div class="img_frame">
         <a href="{{ p['file_url'] }}" target="_blank">
@@ -131,8 +165,6 @@
         </a>
     </div>
     {% endfor %}
-
-   
 
     {% if rating == "s" %}
     <div id="footer">
