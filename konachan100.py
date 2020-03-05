@@ -15,9 +15,13 @@ def webread(url, readtimeout=30):
     if url in url_read_cache:
         return url_read_cache[url]
     opener = urllib.request.build_opener()
-    opener.addheaders = [('User-Agent',
-                          'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'),
-                         ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')]
+    opener.addheaders = [
+        ('User-Agent',
+         'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'
+         ),
+        ('Accept',
+         'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')
+    ]
     result = opener.open(url, None, readtimeout).read()
     url_read_cache[url] = result
     return result
@@ -73,7 +77,7 @@ class PostList:
             data = json.loads(result)
             return data
         except Exception as e:
-            print("Failed, "+str(e))
+            print("Failed, " + str(e))
             return None
 
     def render_pc(self, post_list, audio=None):
@@ -88,10 +92,13 @@ class PostList:
                 col = []
         if len(col) > 0:
             row.append(col)
-        output = self.build_path+'index.html'
-        print("Rendering to "+output)
-        page = template_pc.render(
-            postrow=row, target=self.target, othertargets=self.othertargets, audio=audio, rating=self.rating)
+        output = self.build_path + 'index.html'
+        print("Rendering to " + output)
+        page = template_pc.render(postrow=row,
+                                  target=self.target,
+                                  othertargets=self.othertargets,
+                                  audio=audio,
+                                  rating=self.rating)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
         print("Page refreshed")
@@ -99,24 +106,26 @@ class PostList:
     def render_mobile(self, post_list):
         if post_list is None:
             return
-        output = self.build_path+'m/index.html'
-        print("Rendering to "+output)
-        page = template_mobile.render(
-            posts=post_list, target=self.target, othertargets=self.othertargets, rating=self.rating)
+        output = self.build_path + 'm/index.html'
+        print("Rendering to " + output)
+        page = template_mobile.render(posts=post_list,
+                                      target=self.target,
+                                      othertargets=self.othertargets,
+                                      rating=self.rating)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
         print("Page refreshed")
 
     def dump_postlist(self, post_list):
-        output = self.build_path+'post.json'
+        output = self.build_path + 'post.json'
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(json.dumps(post_list, indent=4))
 
     def build(self):
         if not os.path.exists(self.build_path):
             os.makedirs(self.build_path)
-        if not os.path.exists(self.build_path+"m/"):
-            os.makedirs(self.build_path+"m/")
+        if not os.path.exists(self.build_path + "m/"):
+            os.makedirs(self.build_path + "m/")
 
         data = self.get_data()
         self.render_pc(data)
@@ -131,9 +140,9 @@ class PostListRating(PostList):
             if rating == 's':
                 self.build_path = build_path_base
             elif rating == 'q':
-                self.build_path = build_path_base+'q/'
+                self.build_path = build_path_base + 'q/'
             elif rating == 'e':
-                self.build_path = build_path_base+'e/'
+                self.build_path = build_path_base + 'e/'
 
 
 class DataView:
@@ -220,11 +229,11 @@ class PostCategoary:
             data = json.loads(result)
             return data
         except Exception as e:
-            print("Failed, "+str(e))
+            print("Failed, " + str(e))
             return None
 
     def update_cache(self, data, overwrite=False):
-        cache_file = self.build_path+"cache.json"
+        cache_file = self.build_path + "cache.json"
         print('update cache file ', cache_file)
         if not overwrite:
             cached_list = []
@@ -256,17 +265,18 @@ class PostCategoary:
             os.makedirs(self.build_path)
         subdirs = ["m/", "q/", "q/m/", "e/", "e/m/"]
         for sd in subdirs:
-            if not os.path.exists(self.build_path+sd):
-                os.makedirs(self.build_path+sd)
+            if not os.path.exists(self.build_path + sd):
+                os.makedirs(self.build_path + sd)
 
         data_view = DataView(data, self.viewtype)
-        data_discard = DataDiscard(
-            data, self.discardtype, data_view.overflow, 1000)
+        data_discard = DataDiscard(data, self.discardtype, data_view.overflow,
+                                   1000)
         if data_discard.cuted:
             self.update_cache(data_discard.data, True)
 
-        data_list = [data_view.rating["s"],
-                     data_view.rating["q"], data_view.rating["e"]]
+        data_list = [
+            data_view.rating["s"], data_view.rating["q"], data_view.rating["e"]
+        ]
         for i in range(min(3, len(self.post_list))):
             dl = data_list[i]
             if len(dl) > 100:
@@ -274,9 +284,10 @@ class PostCategoary:
             self.post_list[i].render_pc(dl, self.audio)
             self.post_list[i].render_mobile(dl)
             self.post_list[i].dump_postlist(dl)
-    
+
     def rebuild(self):
         self.build(self.update_cache([]))
+
 
 class PostCategoaryArtist(PostCategoary):
     def __init__(self, artistname, page=None):
@@ -287,21 +298,22 @@ class PostCategoaryArtist(PostCategoary):
         else:
             self.url = cfg_host + \
                 "/post.json?limit=100&tags=%s" % (artistname,)
-        self.build_path = "../c/artist/%s/" % (artistname,)
+        self.build_path = "../c/artist/%s/" % (artistname, )
         self.setup_postlist()
-        self.name = "Artist|"+artistname
+        self.name = "Artist|" + artistname
 
 
 categoary_list = [PostCategoary(c) for c in cfg_cate]
+once_categoary_list = [PostCategoary(c) for c in cfg_loadonce]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
 custom_build_list = categoary_list + artist_list
-if buildcount < len(cfg_loadonce):
-    custom_build_list = cfg_loadonce
+if buildcount < len(once_categoary_list):
+    custom_build_list = once_categoary_list
 current_build_index = (buildcount % len(cfg_home),
                        buildcount % len(custom_build_list))
 print('Current build: Home[%d], Categoary[%d]' % current_build_index)
 
-for cbl in custom_build_list:
+for cbl in once_categoary_list + categoary_list + artist_list:
     cbl.rebuild()
 if len(cfg_home) > 0:
     PostList(cfg_home[current_build_index[0]]).build()
@@ -309,11 +321,14 @@ if len(custom_build_list) > 0:
     custom_build_list[current_build_index[1]].build()
 
 with open('buildcount.txt', 'w') as f:
-    f.write(str(buildcount+1))
+    f.write(str(buildcount + 1))
 
 categoary_indices_namemap = {}
-for c in custom_build_list:
-    if c.name and c.name not in custom_build_list:
+categoary_entry = categoary_list + once_categoary_list + artist_list
+print("Updating entry list")
+print(categoary_entry)
+for c in categoary_entry:
+    if c.name and c.name not in categoary_entry:
         categoary_indices_namemap[c.name] = c
 page = template_categoaries.render(
     categoary_indices=categoary_indices_namemap.values())
