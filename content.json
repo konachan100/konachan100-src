@@ -121,6 +121,11 @@
             "url": "<host>/post.json?limit=100&tags=nekopara+game_cg",
             "build_path": "../c/nekopara_gamecg/",
             "disard": "old"
+        },
+        {
+            "name":"Scenic | Origional Sunset H-Score",
+            "url":"<host>/post.json?limit=100&tags=sunset+order:score+scenic+original",
+            "build_path":"../c/scenic/origional_sunset_hscore/",
         }
     ]
 }

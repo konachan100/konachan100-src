@@ -1,18 +1,19 @@
-# konachan100.github.io
-View most recent 100 posts from Konachan.net:    https://konachan100.github.io/
+# konachan100-src
 
-## Why this project
-- Konachan.net index page may unavaliable due to your ISP but its posts still accessable. 
-- I always need a quick look of new posts.
-- Mobile device users want a suitable HTML layout
+page generator for *konachan100.github.io*
 
-## How does it work
-Page updating is done by a cloud server that can access Konachan web API, and post content updates once per 5 min, see shell script for detail. during each update, the program fetches post.json and generate static web pages, then git-push to this repo.
 
-**Warning:** Do not try to build a konachan mirror site on your cloud server, 
-your server instance will be blocked for political-right reason.
+## Content configuration
+- home: basic content, loading latest 100 posts.
+- categoaries: posts with specific tags.
+- artists: posts with artist tags.
+- loadonce: post list will not update
 
-## Dev Requirement
-- Python 3.x
-- Python Library
-  - Jinja2
+### parameters
+- url: data sorce provided by konachan
+- name: 
+- view
+    - hscore: display posts order by score
+- discard
+    - old: discard oldest posts if posts number over cache limit
+- audio: the page will have an *APlayer*
