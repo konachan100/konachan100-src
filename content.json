@@ -1,5 +1,5 @@
 {
-    "host":"http://www.konachan.net",
+    "host": "http://www.konachan.net",
     "allow_ratings": [
         "s",
         "q",
@@ -65,7 +65,7 @@
                     "cover": "https://gensokyoradio.net/images/assets/gr-logo.png"
                 }
             ],
-            "characters":[
+            "characters": [
                 "remilia_scarlet"
             ]
         },
@@ -82,13 +82,13 @@
             "disard": "old"
         }
     ],
-    "artists":[
-        "natsumoka", 
-        "anmi", 
-        "annin_doufu", 
-        "miwabe_sakura", 
-        "edel_(qi--yu)" ,
-        "sousouman", 
+    "artists": [
+        "natsumoka",
+        "anmi",
+        "annin_doufu",
+        "miwabe_sakura",
+        "edel_(qi--yu)",
+        "sousouman",
         "ke-ta",
         "mauve",
         "onineko",
@@ -111,11 +111,11 @@
         "yoruneko",
         "ru_zhai"
     ],
-    "loadonce":[
+    "loadonce": [
         {
             "url": "<host>/post.json?limit=100&tags=nekopara+game_cg&page=2",
             "build_path": "../c/nekopara_gamecg/"
-        },        
+        },
         {
             "name": "Nekopara Game CG",
             "url": "<host>/post.json?limit=100&tags=nekopara+game_cg",
@@ -123,9 +123,9 @@
             "disard": "old"
         },
         {
-            "name":"Scenic | Origional Sunset H-Score",
-            "url":"<host>/post.json?limit=100&tags=sunset+order:score+scenic+original",
-            "build_path":"../c/scenic/origional_sunset_hscore/",
+            "name": "Scenic | Origional Sunset H-Score",
+            "url": "<host>/post.json?limit=100&tags=sunset+order:score+scenic+original",
+            "build_path": "../c/scenic/origional_sunset_hscore/"
         }
     ]
 }
