@@ -1,6 +1,6 @@
 {
-    "host": "http://www.konachan.net",
-    "logo":"https://konachan.net/images/konachan_net_sm_std.png",
+    "host": "https://yande.re",
+    "logo": "https://assets.yande.re/assets/logo_small-418e8d5ec0229f274edebe4af43b01aa29ed83b715991ba14bb41ba06b5b57b5.png",
     "allow_ratings": [
         "s",
         "q",
@@ -28,15 +28,21 @@
     ],
     "categoaries": [
         {
-            "tags": ["rating:safe"],
+            "tags": [
+                "rating:safe"
+            ],
             "build_path": "../c/hot/"
         },
         {
-            "tags": ["rating:questionable"],
+            "tags": [
+                "rating:questionable"
+            ],
             "build_path": "../c/hot/"
         },
         {
-            "tags": ["rating:explicit"],
+            "tags": [
+                "rating:explicit"
+            ],
             "build_path": "../c/hot/"
         },
         {
@@ -47,7 +53,9 @@
         },
         {
             "name": "Touhou",
-            "tags": ["touhou"],
+            "tags": [
+                "touhou"
+            ],
             "build_path": "../c/touhou/",
             "disard": "old",
             "audio": [
