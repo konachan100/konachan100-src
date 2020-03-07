@@ -1,3 +1,3 @@
 #!/bin/bash
 git pull
-python konachan100.py
+python3 konachan100.py

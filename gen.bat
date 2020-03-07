@@ -1,2 +1,2 @@
-git pull
-python konachan100.py
+git pull origin yande
+python3 konachan100.py

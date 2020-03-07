@@ -2,7 +2,7 @@
 while true
 do
     bash update.sh >> log.txt
-    python trimlog.py
+    python3 trimlog.py
     sleep 300s
 done
 
