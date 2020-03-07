@@ -37,6 +37,7 @@ cfg_home = content_cfg['home']
 cfg_cate = content_cfg['categoaries']
 cfg_artists = content_cfg['artists']
 cfg_loadonce = content_cfg['loadonce']
+cfg_logo = content_cfg['logo']
 
 print("build targets: ", allow_ratings)
 
@@ -92,7 +93,7 @@ class PostList:
             row.append(col)
         output = self.build_path + 'index.html'
         print("Rendering to " + output)
-        page = template_pc.render(postrow=row, audio=audio, rating=self.rating)
+        page = template_pc.render(postrow=row, audio=audio, rating=self.rating, logo = cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
         print("Page refreshed")
@@ -104,7 +105,7 @@ class PostList:
         print("Rendering to " + output)
         page = template_mobile.render(posts=post_list,
                                       rating=self.rating,
-                                      audio=audio)
+                                      audio=audio, logo = cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
         print("Page refreshed")
@@ -195,6 +196,8 @@ class PostCategoary:
     def load_cfg(self, cfg):
         if 'url' in cfg:
             self.url = cfg['url'].replace('<host>', cfg_host)
+        elif 'tags' in cfg:
+            self.url = '%s/post.json?limit=100&tags=%s'%(cfg_host, '+'.join(cfg['tags']))
         if 'name' in cfg:
             self.name = cfg['name']
         if 'build_path' in cfg:

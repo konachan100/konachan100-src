@@ -1,5 +1,6 @@
 {
     "host": "http://www.konachan.net",
+    "logo":"https://konachan.net/images/konachan_net_sm_std.png",
     "allow_ratings": [
         "s",
         "q",
@@ -27,15 +28,15 @@
     ],
     "categoaries": [
         {
-            "url": "<host>/post.json?limit=100&tags=rating:safe",
+            "tags": ["rating:safe"],
             "build_path": "../c/hot/"
         },
         {
-            "url": "<host>/post.json?limit=100&tags=rating:questionable",
+            "tags": ["rating:questionable"],
             "build_path": "../c/hot/"
         },
         {
-            "url": "<host>/post.json?limit=100&tags=rating:explicit",
+            "tags": ["rating:explicit"],
             "build_path": "../c/hot/"
         },
         {
@@ -46,7 +47,7 @@
         },
         {
             "name": "Touhou",
-            "url": "<host>/post.json?limit=100&tags=touhou",
+            "tags": ["touhou"],
             "build_path": "../c/touhou/",
             "disard": "old",
             "audio": [
@@ -71,13 +72,17 @@
         },
         {
             "name": "S.A.O.",
-            "url": "<host>/post?limit=100&tags=sword_art_online",
+            "tags": [
+                "sword_art_online"
+            ],
             "build_path": "../c/sao/",
             "discard": "old"
         },
         {
             "name": "Scenic",
-            "url": "<host>/post.json?limit=100&tags=scenic",
+            "tags": [
+                "scenic"
+            ],
             "build_path": "../c/scenic/",
             "disard": "old"
         }
