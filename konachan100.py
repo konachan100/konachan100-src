@@ -321,8 +321,7 @@ with open('buildcount.txt', 'w') as f:
 
 categoary_indices_namemap = {}
 categoary_entry = categoary_list + once_categoary_list + artist_list
-print("Updating entry list")
-print(categoary_entry)
+
 for c in categoary_entry:
     if c.name and c.name not in categoary_entry:
         categoary_indices_namemap[c.name] = c
