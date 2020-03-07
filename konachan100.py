@@ -92,23 +92,19 @@ class PostList:
         if len(col) > 0:
             row.append(col)
         output = self.build_path + 'index.html'
-        print("Rendering to " + output)
         page = template_pc.render(postrow=row, audio=audio, rating=self.rating, logo = cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
-        print("Page refreshed")
 
     def render_mobile(self, post_list, audio=None):
         if post_list is None:
             return
         output = self.build_path + 'm/index.html'
-        print("Rendering to " + output)
         page = template_mobile.render(posts=post_list,
                                       rating=self.rating,
                                       audio=audio, logo = cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
-        print("Page refreshed")
 
     def dump_postlist(self, post_list):
         output = self.build_path + 'post.json'
