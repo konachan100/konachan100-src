@@ -92,7 +92,10 @@ class PostList:
         if len(col) > 0:
             row.append(col)
         output = self.build_path + 'index.html'
-        page = template_pc.render(postrow=row, audio=audio, rating=self.rating, logo = cfg_logo)
+        page = template_pc.render(postrow=row,
+                                  audio=audio,
+                                  rating=self.rating,
+                                  logo=cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
 
@@ -102,7 +105,8 @@ class PostList:
         output = self.build_path + 'm/index.html'
         page = template_mobile.render(posts=post_list,
                                       rating=self.rating,
-                                      audio=audio, logo = cfg_logo)
+                                      audio=audio,
+                                      logo=cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
 
@@ -193,7 +197,8 @@ class PostCategoary:
         if 'url' in cfg:
             self.url = cfg['url'].replace('<host>', cfg_host)
         elif 'tags' in cfg:
-            self.url = '%s/post.json?limit=100&tags=%s'%(cfg_host, '+'.join(cfg['tags']))
+            self.url = '%s/post.json?limit=100&tags=%s' % (cfg_host, '+'.join(
+                cfg['tags']))
         if 'name' in cfg:
             self.name = cfg['name']
         if 'build_path' in cfg:
@@ -233,6 +238,7 @@ class PostCategoary:
             if os.path.exists(cache_file):
                 with open(cache_file, 'r') as f:
                     cached_list = json.loads(f.read())
+                    print('old cache size ', len(cached_list))
                 for p in data:
                     data_dir[p["id"]] = p
             for cl in cached_list:
@@ -315,13 +321,15 @@ if len(custom_build_list) > 0:
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount + 1))
 
-categoary_indices_namemap = {}
+#categoary_indices_namemap = {}
+categoary_nameset = set()
 categoary_entry = categoary_list + once_categoary_list + artist_list
-
+print('build categoary entry')
+print(json.dumps([c.name for c in categoary_entry], indent=4))
 for c in categoary_entry:
-    if c.name and c.name not in categoary_entry:
-        categoary_indices_namemap[c.name] = c
-page = template_categoaries.render(
-    categoary_indices=categoary_indices_namemap.values())
+    if c.name and c.name not in categoary_nameset:
+        categoary_nameset.add(c.name)
+categoary_indices = [c for c in categoary_entry if c.name in categoary_nameset]
+page = template_categoaries.render(categoary_indices=categoary_indices)
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
     fn.write(page)
