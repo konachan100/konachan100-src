@@ -1,2 +1,2 @@
 git pull
-python3 konachan100.py
+python konachan100.py
