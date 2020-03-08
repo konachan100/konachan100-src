@@ -28,7 +28,7 @@ def webread(url, readtimeout=30):
 
 
 content_cfg = None
-with open("content.json", "r") as op:
+with open("../content.json", "r") as op:
     content_cfg = json.loads(op.read())
 
 allow_ratings = content_cfg["allow_ratings"]
@@ -92,23 +92,23 @@ class PostList:
         if len(col) > 0:
             row.append(col)
         output = self.build_path + 'index.html'
-        print("Rendering to " + output)
-        page = template_pc.render(postrow=row, audio=audio, rating=self.rating, logo = cfg_logo)
+        page = template_pc.render(postrow=row,
+                                  audio=audio,
+                                  rating=self.rating,
+                                  logo=cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
-        print("Page refreshed")
 
     def render_mobile(self, post_list, audio=None):
         if post_list is None:
             return
         output = self.build_path + 'm/index.html'
-        print("Rendering to " + output)
         page = template_mobile.render(posts=post_list,
                                       rating=self.rating,
-                                      audio=audio, logo = cfg_logo)
+                                      audio=audio,
+                                      logo=cfg_logo)
         with codecs.open(output, 'w', 'utf-8') as fn:
             fn.write(page)
-        print("Page refreshed")
 
     def dump_postlist(self, post_list):
         output = self.build_path + 'post.json'
@@ -183,6 +183,7 @@ class PostCategoary:
         self.discardtype = None
         self.audio = None
         self.post_list = []
+        self.cached_posts_count=0
         if cfg is not None:
             self.load_cfg(cfg)
 
@@ -197,7 +198,8 @@ class PostCategoary:
         if 'url' in cfg:
             self.url = cfg['url'].replace('<host>', cfg_host)
         elif 'tags' in cfg:
-            self.url = '%s/post.json?limit=100&tags=%s'%(cfg_host, '+'.join(cfg['tags']))
+            self.url = '%s/post.json?limit=100&tags=%s' % (cfg_host, '+'.join(
+                cfg['tags']))
         if 'name' in cfg:
             self.name = cfg['name']
         if 'build_path' in cfg:
@@ -237,6 +239,7 @@ class PostCategoary:
             if os.path.exists(cache_file):
                 with open(cache_file, 'r') as f:
                     cached_list = json.loads(f.read())
+                    print('old cache size ', len(cached_list))
                 for p in data:
                     data_dir[p["id"]] = p
             for cl in cached_list:
@@ -247,6 +250,7 @@ class PostCategoary:
         with open(cache_file, 'w') as f:
             print('new cache size ', len(data))
             f.write(json.dumps(data, indent=4))
+        self.cached_posts_count = len(data)
         return data
 
     def build(self, data=None):
@@ -319,14 +323,21 @@ if len(custom_build_list) > 0:
 with open('buildcount.txt', 'w') as f:
     f.write(str(buildcount + 1))
 
-categoary_indices_namemap = {}
+#categoary_indices_namemap = {}
+categoary_nameset = set()
 categoary_entry = categoary_list + once_categoary_list + artist_list
-print("Updating entry list")
-print(categoary_entry)
+print('build categoary entry')
+print(
+    json.dumps([
+        '%s [%d]' %
+        (c.name, c.cached_posts_count)
+        for c in categoary_entry if c.name is not None
+    ],
+               indent=4))
 for c in categoary_entry:
-    if c.name and c.name not in categoary_entry:
-        categoary_indices_namemap[c.name] = c
-page = template_categoaries.render(
-    categoary_indices=categoary_indices_namemap.values())
+    if c.name and c.name not in categoary_nameset:
+        categoary_nameset.add(c.name)
+categoary_indices = [c for c in categoary_entry if c.name in categoary_nameset]
+page = template_categoaries.render(categoary_indices=categoary_indices)
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
     fn.write(page)

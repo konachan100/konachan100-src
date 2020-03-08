@@ -9,7 +9,7 @@
 <body>
     {% for c in categoary_indices %}   
     <div>
-        <a href="{{c.build_path}}">{{c.name}}</a>
+        <a href="{{c.build_path}}">{{c.name}} [{{c.cached_posts_count}}]</a>
     </div>
     {% endfor %}
 </body>
