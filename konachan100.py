@@ -28,7 +28,7 @@ def webread(url, readtimeout=30):
 
 
 content_cfg = None
-with open("content.json", "r") as op:
+with open("../content.json", "r") as op:
     content_cfg = json.loads(op.read())
 
 allow_ratings = content_cfg["allow_ratings"]
@@ -183,6 +183,7 @@ class PostCategoary:
         self.discardtype = None
         self.audio = None
         self.post_list = []
+        self.cached_posts_count=0
         if cfg is not None:
             self.load_cfg(cfg)
 
@@ -249,6 +250,7 @@ class PostCategoary:
         with open(cache_file, 'w') as f:
             print('new cache size ', len(data))
             f.write(json.dumps(data, indent=4))
+        self.cached_posts_count = len(data)
         return data
 
     def build(self, data=None):
@@ -325,7 +327,13 @@ with open('buildcount.txt', 'w') as f:
 categoary_nameset = set()
 categoary_entry = categoary_list + once_categoary_list + artist_list
 print('build categoary entry')
-print(json.dumps([c.name for c in categoary_entry], indent=4))
+print(
+    json.dumps([
+        '%s [%d]' %
+        (c.name, c.cached_posts_count)
+        for c in categoary_entry if c.name is not None
+    ],
+               indent=4))
 for c in categoary_entry:
     if c.name and c.name not in categoary_nameset:
         categoary_nameset.add(c.name)
