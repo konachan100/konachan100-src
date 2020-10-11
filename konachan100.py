@@ -171,6 +171,9 @@ class DataDiscard:
         if discardtype == "old":
             self.data.sort(key=(lambda d: d['created_at']), reverse=True)
             self.data = self.data[0:preservesize]
+        elif discardtype == "lowscore":
+            self.data.sort(key=(lambda d: d['score']), reverse=True)
+            self.data = self.data[0:preservesize]
 
 
 class PostCategoary:
