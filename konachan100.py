@@ -317,7 +317,7 @@ class PostCategoaryCopyright(PostCategoary):
         else:
             self.url = cfg_host + \
                 "/post.json?limit=100&tags=%s" % (param['tag'],)
-        self.build_path = "../c/copyright/%s/" % ( param['tag'], )
+        self.build_path = "../c/copyright/%s/" % (param['tag'].replace('?', '_'),)
         self.setup_postlist()
         self.name = "Copyright|" + param['title']
 
