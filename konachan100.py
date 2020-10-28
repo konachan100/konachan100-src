@@ -331,8 +331,8 @@ if buildcount < len(once_categoary_list):
 current_build_index = (buildcount % len(cfg_home),
                        buildcount % len(custom_build_list))
 print('Current build: Home[%d], Categoary[%d]' % current_build_index)
-
-for cbl in once_categoary_list + categoary_list + artist_list + copyright_list:
+categoary_build_list =  once_categoary_list + categoary_list + artist_list + copyright_list
+for cbl in categoary_build_list:
     cbl.rebuild()
 if len(cfg_home) > 0:
     PostList(cfg_home[current_build_index[0]]).build()
@@ -344,19 +344,18 @@ with open('buildcount.txt', 'w') as f:
 
 #categoary_indices_namemap = {}
 categoary_nameset = set()
-categoary_entry = categoary_list + once_categoary_list + artist_list
 print('build categoary entry')
 print(
     json.dumps([
         '%s [%d]' %
         (c.name, c.cached_posts_count)
-        for c in categoary_entry if c.name is not None
+        for c in categoary_build_list if c.name is not None
     ],
                indent=4))
-for c in categoary_entry:
+for c in categoary_build_list:
     if c.name and c.name not in categoary_nameset:
         categoary_nameset.add(c.name)
-categoary_indices = [c for c in categoary_entry if c.name in categoary_nameset]
+categoary_indices = [c for c in categoary_build_list if c.name in categoary_nameset]
 page = template_categoaries.render(categoary_indices=categoary_indices)
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
     fn.write(page)
