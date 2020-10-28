@@ -36,6 +36,9 @@ cfg_host = content_cfg['host']
 cfg_home = content_cfg['home']
 cfg_cate = content_cfg['categoaries']
 cfg_artists = content_cfg['artists']
+cfg_copyright = []
+if 'copyright' in content_cfg:
+    cfg_copyright = content_cfg['copyright']
 cfg_loadonce = content_cfg['loadonce']
 cfg_logo = content_cfg['logo']
 
@@ -308,20 +311,20 @@ class PostCategoaryArtist(PostCategoary):
 class PostCategoaryCopyright(PostCategoary):
     def __init__(self, param):
         super().__init__()
-        if param['page']:
+        if 'page' in param:
             self.url = cfg_host + \
                 "/post.json?limit=100&tags=%s&page=%d" % (param['tag'], param['page'])
         else:
             self.url = cfg_host + \
                 "/post.json?limit=100&tags=%s" % (param['tag'],)
-        self.build_path = "../c/artist/%s/" % ( param['tag'], )
+        self.build_path = "../c/copyright/%s/" % ( param['tag'], )
         self.setup_postlist()
         self.name = "Copyright|" + param['title']
 
 categoary_list = [PostCategoary(c) for c in cfg_cate]
 once_categoary_list = [PostCategoary(c) for c in cfg_loadonce]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
-copyright_list = [PostCategoaryCopyright(c) for c in content_cfg['copyright']]
+copyright_list = [PostCategoaryCopyright(c) for c in cfg_copyright]
 custom_build_list = categoary_list + artist_list
 if buildcount < len(once_categoary_list):
     custom_build_list = once_categoary_list
