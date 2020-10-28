@@ -305,10 +305,23 @@ class PostCategoaryArtist(PostCategoary):
         self.setup_postlist()
         self.name = "Artist|" + artistname
 
+class PostCategoaryCopyright(PostCategoary):
+    def __init__(self, param):
+        super().__init__()
+        if param['page']:
+            self.url = cfg_host + \
+                "/post.json?limit=100&tags=%s&page=%d" % (param['tag'], param['page'])
+        else:
+            self.url = cfg_host + \
+                "/post.json?limit=100&tags=%s" % (param['tag'],)
+        self.build_path = "../c/artist/%s/" % ( param['tag'], )
+        self.setup_postlist()
+        self.name = "Copyright|" + param['title']
 
 categoary_list = [PostCategoary(c) for c in cfg_cate]
 once_categoary_list = [PostCategoary(c) for c in cfg_loadonce]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
+copyright_list = [PostCategoaryCopyright(c) for c in content_cfg['copyright']]
 custom_build_list = categoary_list + artist_list
 if buildcount < len(once_categoary_list):
     custom_build_list = once_categoary_list
@@ -316,7 +329,7 @@ current_build_index = (buildcount % len(cfg_home),
                        buildcount % len(custom_build_list))
 print('Current build: Home[%d], Categoary[%d]' % current_build_index)
 
-for cbl in once_categoary_list + categoary_list + artist_list:
+for cbl in once_categoary_list + categoary_list + artist_list + copyright_list:
     cbl.rebuild()
 if len(cfg_home) > 0:
     PostList(cfg_home[current_build_index[0]]).build()
