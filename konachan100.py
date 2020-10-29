@@ -325,13 +325,13 @@ categoary_list = [PostCategoary(c) for c in cfg_cate]
 once_categoary_list = [PostCategoary(c) for c in cfg_loadonce]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
 copyright_list = [PostCategoaryCopyright(c) for c in cfg_copyright]
-custom_build_list = categoary_list + artist_list
+custom_build_list = categoary_list + artist_list + copyright_list
 if buildcount < len(once_categoary_list):
     custom_build_list = once_categoary_list
 current_build_index = (buildcount % len(cfg_home),
                        buildcount % len(custom_build_list))
 print('Current build: Home[%d], Categoary[%d]' % current_build_index)
-categoary_build_list =  once_categoary_list + categoary_list + artist_list + copyright_list
+categoary_build_list =  once_categoary_list + custom_build_list
 for cbl in categoary_build_list:
     cbl.rebuild()
 if len(cfg_home) > 0:
