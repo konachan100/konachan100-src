@@ -324,8 +324,9 @@ class PostCategoaryCopyright(PostCategoary):
 categoary_list = [PostCategoary(c) for c in cfg_cate]
 once_categoary_list = [PostCategoary(c) for c in cfg_loadonce]
 artist_list = [PostCategoaryArtist(c) for c in cfg_artists]
+artist_list_p2 = [PostCategoaryArtist(c, 2) for c in cfg_artists]
 copyright_list = [PostCategoaryCopyright(c) for c in cfg_copyright]
-custom_build_list = categoary_list + artist_list + copyright_list
+custom_build_list = categoary_list + artist_list + artist_list_p2 + copyright_list
 if buildcount < len(once_categoary_list):
     custom_build_list = once_categoary_list
 current_build_index = (buildcount % len(cfg_home),
