@@ -238,14 +238,14 @@ class PostCategoary:
 
     def update_cache(self, data, overwrite=False):
         cache_file = self.build_path + "cache.json"
-        print('update cache file ', cache_file)
+        print('update cache file ', cache_file, )
         if not overwrite:
             cached_list = []
             data_dir = {}
             if os.path.exists(cache_file):
                 with open(cache_file, 'r') as f:
                     cached_list = json.loads(f.read())
-                    print('old cache size ', len(cached_list))
+                    print('\told cache size ', len(cached_list), )
                 for p in data:
                     data_dir[p["id"]] = p
             for cl in cached_list:
@@ -254,7 +254,7 @@ class PostCategoary:
         if not os.path.exists(self.build_path):
             os.makedirs(self.build_path)
         with open(cache_file, 'w') as f:
-            print('new cache size ', len(data))
+            print(' new cache size ', len(data))
             f.write(json.dumps(data, indent=4))
         self.cached_posts_count = len(data)
         return data
