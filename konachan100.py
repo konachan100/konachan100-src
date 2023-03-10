@@ -264,7 +264,12 @@ class PostCategoary:
             data = self.get_data()
         if data is None:
             return
-        self.update_cache(data)
+        data_view = DataView(data, self.viewtype)
+        data_discard = DataDiscard(data, self.discardtype, data_view.overflow, 1000)
+        if data_discard.cuted:
+            self.update_cache(data_discard.data, True)
+        else:
+            self.update_cache(data)
         if self.name is None:
             return
         if not os.path.exists(self.build_path):
@@ -274,11 +279,6 @@ class PostCategoary:
             if not os.path.exists(self.build_path + sd):
                 os.makedirs(self.build_path + sd)
 
-        data_view = DataView(data, self.viewtype)
-        data_discard = DataDiscard(data, self.discardtype, data_view.overflow,
-                                   1000)
-        if data_discard.cuted:
-            self.update_cache(data_discard.data, True)
 
         data_list = [
             data_view.rating["s"], data_view.rating["q"], data_view.rating["e"]
