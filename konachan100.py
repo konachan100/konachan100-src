@@ -345,10 +345,11 @@ with open('buildcount.txt', 'w') as f:
 
 #categoary_indices_namemap = {}
 categoary_nameset = set()
+categoary_indices = []
 for c in categoary_build_list:
     if c.name and c.name not in categoary_nameset:
         categoary_nameset.add(c.name)
-categoary_indices = [c for c in categoary_build_list if c.name in categoary_nameset]
+        categoary_indices.append(c)
 
 print('build categoary entry')
 print(
