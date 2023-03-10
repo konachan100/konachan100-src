@@ -345,18 +345,19 @@ with open('buildcount.txt', 'w') as f:
 
 #categoary_indices_namemap = {}
 categoary_nameset = set()
+for c in categoary_build_list:
+    if c.name and c.name not in categoary_nameset:
+        categoary_nameset.add(c.name)
+categoary_indices = [c for c in categoary_build_list if c.name in categoary_nameset]
+
 print('build categoary entry')
 print(
     json.dumps([
         '%s [%d]' %
         (c.name, c.cached_posts_count)
-        for c in categoary_build_list if c.name is not None
+        for c in categoary_indices if c.name is not None
     ],
                indent=4))
-for c in categoary_build_list:
-    if c.name and c.name not in categoary_nameset:
-        categoary_nameset.add(c.name)
-categoary_indices = [c for c in categoary_build_list if c.name in categoary_nameset]
 page = template_categoaries.render(categoary_indices=categoary_indices)
 with codecs.open('../c/index.html', 'w', 'utf-8') as fn:
     fn.write(page)
